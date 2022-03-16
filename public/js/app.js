@@ -2117,12 +2117,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     Link: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.Link
   },
-  props: ["test"]
+  props: ["test"],
+  data: function data() {
+    return {
+      items: [{
+        title: 'Users',
+        icon: 'mdi-user'
+      }, {
+        title: 'Pages',
+        icon: 'mdi-account'
+      }]
+    };
+  }
 });
 
 /***/ }),
@@ -25253,21 +25289,74 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
+    { attrs: { height: "350px" } },
     [
       _c(
-        "v-container",
+        "v-navigation-drawer",
+        {
+          attrs: { absolute: "", permanent: "", right: "" },
+          scopedSlots: _vm._u([
+            {
+              key: "prepend",
+              fn: function () {
+                return [
+                  _c(
+                    "v-list-item",
+                    { attrs: { "two-line": "" } },
+                    [
+                      _c("v-list-item-avatar", [
+                        _c("img", {
+                          attrs: {
+                            src: "https://randomuser.me/api/portraits/women/81.jpg",
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-content",
+                        [
+                          _c("v-list-item-title", [_vm._v("Jane Smith")]),
+                          _vm._v(" "),
+                          _c("v-list-item-subtitle", [_vm._v("Logged In")]),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ]
+              },
+              proxy: true,
+            },
+          ]),
+        },
         [
-          _c("v-btn", [_vm._v("\n            Click Me!\n        ")]),
+          _vm._v(" "),
+          _c("v-divider"),
           _vm._v(" "),
           _c(
-            "div",
-            [
-              _c("h1", [_vm._v("Inertiajs is " + _vm._s(_vm.test))]),
-              _vm._v(" "),
-              _c("Link", { attrs: { href: "/about-us" } }, [
-                _vm._v("Go to about us"),
-              ]),
-            ],
+            "v-list",
+            { attrs: { dense: "" } },
+            _vm._l(_vm.items, function (item) {
+              return _c(
+                "v-list-item",
+                { key: item.title },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v(_vm._s(item.title))])],
+                    1
+                  ),
+                ],
+                1
+              )
+            }),
             1
           ),
         ],

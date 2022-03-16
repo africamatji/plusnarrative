@@ -5,13 +5,22 @@ import { createInertiaApp } from '@inertiajs/inertia-vue'
 import { InertiaProgress } from "@inertiajs/progress";
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import Layout from './Layout'
+import PublicLayout from './PublicLayout'
 
 InertiaProgress.init();
 
 Vue.use(Vuetify);
 
 createInertiaApp({
-    resolve: name => require(`./Pages/${name}`),
+    resolve: name => {
+        const page = require(`./Pages/${name}`).default
+        if (page.layout === undefined) {
+            page.layout = PublicLayout;
+        }
+        page.layout = page.layout || Layout
+        return page
+    },
     setup({ el, App, props, plugin }) {
       Vue.use(plugin)
   

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return Inertia::render('Home', ['test' => 'Its works']);
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    //return view('dashboard');
+    return Inertia::render('Dashboard', ['test' => 'Its works']);
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
