@@ -32,9 +32,9 @@ Route::group(['middleware' => ['permission:view-admin-dashboard']], function () 
     
     Route::get('/user', [ 
         UserController::class, 'view' 
-    ])->middleware(['auth'])->name('usercreate');    
+    ])->middleware(['auth'])->name('userview');    
 
-    Route::post('/user', [ 
+    Route::post('/user/create', [ 
         UserController::class, 'create' 
     ])->middleware(['auth'])->name('usercreate');  
 });

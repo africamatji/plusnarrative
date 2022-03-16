@@ -3,7 +3,7 @@
         <v-row>
             <v-col>
                 <Link href="/dashboard">Back to users</Link>
-                <h1>{{ formData.name }}</h1>
+                <h1>{{ formData.first_name }}</h1>
             </v-col>
         </v-row>
         <v-row>
@@ -31,7 +31,13 @@
             label="E-mail"
             required
             ></v-text-field>
-
+            <v-text-field
+            v-model="formData.password"
+            :rules="passwordRules"
+            label="Password"
+            type="password"
+            required
+            ></v-text-field>
             <v-radio-group v-model="formData.role">
             <v-radio
                 v-for="role in roles"
@@ -75,7 +81,7 @@
                 first_name: null,
                 role: null,
             },
-            valid: true,
+            valid: false,
             emailRules: [
                 v => !!v || 'E-mail is required',
                 v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -84,11 +90,17 @@
                 v => !!v || 'Name is required',
                 v => (v && v.length > 1) || 'Name is too short',
             ],
+            passwordRules: [
+                v => !!v || 'Password is required',
+                v => (v && v.length > 5) || 'Password is too short',
+            ],
         };
     },
     methods: {
         submit () {
-            this.$inertia.post('/user', this.formData)
+            if (this.$refs.form.validate()) {
+                this.$inertia.post('/user/create', this.formData)
+            } 
         },
     }, 
   }
