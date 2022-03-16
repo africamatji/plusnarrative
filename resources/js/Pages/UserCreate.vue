@@ -1,0 +1,95 @@
+<template>
+    <div>
+        <v-row>
+            <v-col>
+                <Link href="/dashboard">Back to users</Link>
+                <h1>{{ formData.name }}</h1>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+            <v-form
+            ref="form"
+            v-model="valid"
+            lazy-validation
+            >
+            <v-text-field
+            v-model="formData.first_name"
+            :rules="nameRules"
+            label="First Name"
+            required
+            ></v-text-field>
+            <v-text-field
+            v-model="formData.last_name"
+            :rules="nameRules"
+            label="Last Name"
+            required
+            ></v-text-field>
+            <v-text-field
+            v-model="formData.email"
+            :rules="emailRules"
+            label="E-mail"
+            required
+            ></v-text-field>
+
+            <v-radio-group v-model="formData.role">
+            <v-radio
+                v-for="role in roles"
+                :key="role"
+                :label="role"
+                :value="role"
+            ></v-radio>
+            </v-radio-group>
+
+            <v-btn
+            color="success"
+            class="mr-4"
+            @click="submit"
+            >
+            Submit
+            </v-btn>
+            </v-form>
+            </v-col>
+        </v-row>
+    </div>
+</template>
+
+<script>
+    import Layout from './../Layout';
+    import { Link } from '@inertiajs/inertia-vue'
+
+  export default {
+    name: 'Dash',
+    layout: Layout,
+    components: {
+        Link,
+    },
+    props: {
+      roles: Object,
+    },
+    data () {
+        return {
+            formData: {
+                email: null,
+                last_name: null,
+                first_name: null,
+                role: null,
+            },
+            valid: true,
+            emailRules: [
+                v => !!v || 'E-mail is required',
+                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            ],
+            nameRules: [
+                v => !!v || 'Name is required',
+                v => (v && v.length > 1) || 'Name is too short',
+            ],
+        };
+    },
+    methods: {
+        submit () {
+            this.$inertia.post('/user', this.formData)
+        },
+    }, 
+  }
+</script>

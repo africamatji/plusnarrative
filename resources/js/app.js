@@ -1,7 +1,7 @@
 require('./bootstrap');
 
 import Vue from 'vue'
-import { createInertiaApp } from '@inertiajs/inertia-vue'
+import { createInertiaApp, Link } from '@inertiajs/inertia-vue'
 import { InertiaProgress } from "@inertiajs/progress";
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
@@ -11,6 +11,7 @@ import PublicLayout from './PublicLayout'
 InertiaProgress.init();
 
 Vue.use(Vuetify);
+Vue.component("inertia-link", Link);
 
 createInertiaApp({
     resolve: name => {

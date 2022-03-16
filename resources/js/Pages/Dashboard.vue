@@ -1,26 +1,61 @@
 <template>
-  <v-row>
-      <v-col>
-          <h1>Users</h1>
-      </v-col>
-      <v-col>
-          <v-btn>
-              Create New User
-          </v-btn>
-      </v-col>
-  </v-row>
+  <div>
+      <v-row>
+            <v-col>
+                <h1>Users</h1>
+            </v-col>
+            <v-col>
+                <inertia-link as="v-btn" href="/user" color="primary"> Create new user </inertia-link>
+            </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+              <div>
+                <v-data-table
+                  :headers="headers"
+                  :items="users"
+                  item-key="name"
+                  class="elevation-1"
+                  :search="search"
+                  :items-per-page=5
+                >
+                  <template v-slot:top>
+                    <v-text-field
+                      v-model="search"
+                      label="Search for users"
+                      class="mx-4"
+                    ></v-text-field>
+                  </template>
+                </v-data-table>
+              </div>
+          </v-col>
+        </v-row>
+  </div>
 </template>
 
 <script>
   import Layout from './../Layout';
 
   export default {
-      name: 'Dash',
-    // Using the shorthand
+    name: 'Dash',
     layout: Layout,
-
     props: {
-      user: Object,
+      users: Array,
     },
+    data () {
+      return {
+        search: '',
+      };
+    },
+    computed: {
+      headers () {
+        return [
+          { text: 'First Name', value: 'first_name' },
+          { text: 'Last Name', value: 'last_name' },
+          { text: 'Email Address', value: 'email' },
+          { text: 'Member Since', value: 'created_at' },
+        ]
+      },
+    },   
   }
 </script>

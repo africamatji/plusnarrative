@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use Inertia\Inertia;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,15 +15,28 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    //return view('welcome');
-    return Inertia::render('Home', ['test' => 'Its works']);
+/*
+Route::group(['middleware' => ['api']], function () {
+    Route::get('/available', [ServiceProviderController::class, 'getAvailableServiceProviders']);
+    Route::post('/explore', [ServiceProviderController::class, 'exploreServiceProviders']);
+    Route::get('/sp-profile/{id}', [ServiceProviderController::class, 'getServiceProviderProfilePublic']);
+    Route::post('/booking/create', [BookingsController::class, 'createBooking']);
+    Route::post('/payment/signature', [BookingsController::class, 'generateSignature']);
 });
+*/
+Route::get('/', [HomeController::class, 'welcome']);
+Route::group(['middleware' => ['permission:view-admin-dashboard']], function () {
+    Route::get('/dashboard', [ 
+        UserController::class, 'list' 
+    ])->middleware(['auth'])->name('dashboard');   
+    
+    Route::get('/user', [ 
+        UserController::class, 'view' 
+    ])->middleware(['auth'])->name('usercreate');    
 
-Route::get('/dashboard', function () {
-    //return view('dashboard');
-    return Inertia::render('Dashboard', ['test' => 'Its works']);
-})->middleware(['auth'])->name('dashboard');
+    Route::post('/user', [ 
+        UserController::class, 'create' 
+    ])->middleware(['auth'])->name('usercreate');  
+});
 
 require __DIR__.'/auth.php';
