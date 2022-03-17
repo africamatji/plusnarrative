@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use Inertia\Inertia;
 
 /*
@@ -31,12 +32,16 @@ Route::group(['middleware' => ['permission:view-admin-dashboard']], function () 
     ])->middleware(['auth'])->name('dashboard');   
     
     Route::get('/user', [ 
-        UserController::class, 'view' 
+        UserController::class, 'viewCreate' 
     ])->middleware(['auth'])->name('userview');    
 
     Route::post('/user/create', [ 
         UserController::class, 'create' 
     ])->middleware(['auth'])->name('usercreate');  
+
+    Route::get('/pages', [ 
+        PageController::class, 'view' 
+    ])->middleware(['auth'])->name('pageview');      
 });
 
 require __DIR__.'/auth.php';

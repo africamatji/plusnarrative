@@ -20,16 +20,29 @@
 
         <v-list dense>
             <v-list-item
-            v-for="item in items"
-            :key="item.title"
+                v-for="item in items"
+                :key="item.title"
             >
             <v-list-item-icon>
                 <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                <v-list-item-title>
+                    <Link :href="item.href">
+                        {{ item.title }}
+                    </Link>
+                </v-list-item-title>
             </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        <v-btn @click="logout" text>
+                                Logout
+                        </v-btn>
+                    </v-list-item-title>
+                </v-list-item-content>
             </v-list-item>
         </v-list>
         </v-navigation-drawer>
@@ -45,19 +58,25 @@
 </template>
 
 <script>
-import { Link } from "@inertiajs/inertia-vue";
-export default {
-    name: 'Layout',
-    components: {
-        Link,
-    },
-    data () {
-      return {
-        items: [
-          { title: 'Users', icon: 'mdi-account' },
-          { title: 'Pages', icon: 'mdi-note' },
-        ],
-      }
-    },
-};
+    import { Link } from "@inertiajs/inertia-vue";
+
+    export default {
+        name: 'Layout',
+        components: {
+            Link,
+        },
+        data () {
+        return {
+            items: [
+            { title: 'Users', icon: 'mdi-account', href: '/dashboard' },
+            { title: 'Pages', icon: 'mdi-note', href: '/pages' },
+            ],
+        }
+        },
+        methods: {
+            logout () {
+                this.$inertia.post('/logout');
+            },
+        },
+    };
 </script>

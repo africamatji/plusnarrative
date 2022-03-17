@@ -3,11 +3,15 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
-class IpLocation extends Model
+class Tracking extends Model
 {
-    protected $table = 'ip_location';
+    protected $table = 'tracking';
     protected $fillable = [
         'user_id',
         'location',
+        'ip',
+        'ip_location',
+        'browser',
+        'login_at'
     ];
 }

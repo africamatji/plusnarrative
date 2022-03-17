@@ -38,7 +38,7 @@
             type="password"
             required
             ></v-text-field>
-            <v-radio-group v-model="formData.role">
+            <v-radio-group v-model="formData.role" row>
             <v-radio
                 v-for="role in roles"
                 :key="role"
@@ -62,7 +62,7 @@
 
 <script>
     import Layout from './../Layout';
-    import { Link } from '@inertiajs/inertia-vue'
+    import { Link } from '@inertiajs/inertia-vue';
 
   export default {
     name: 'Dash',

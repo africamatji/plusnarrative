@@ -37,7 +37,7 @@
   import Layout from './../Layout';
 
   export default {
-    name: 'Dash',
+    name: 'Dashboard',
     layout: Layout,
     props: {
       users: Array,

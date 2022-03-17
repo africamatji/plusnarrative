@@ -23,7 +23,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function view () {
+    public function viewCreate () {
         $roles = Role::pluck('name','name')->all();
 
         return Inertia::render('UserCreate',[
@@ -40,8 +40,6 @@ class UserController extends Controller
             'role' => 'required'
         ]);
 
-        //$input = $request->all();
-        //dd($input);
         $input = [
             'name' => $request->input('first_name'),
             'first_name' => $request->input('first_name'),
@@ -50,7 +48,6 @@ class UserController extends Controller
             'password' => Hash::make($request->input('password')),
             'role' => $request->input('role')
         ];
-        //$input['password'] = Hash::make($input['password']);
         
         $user = User::create($input);
         $user->assignRole($request->input('role'));
