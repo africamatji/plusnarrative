@@ -8,53 +8,59 @@
         </v-row>
         <v-row>
             <v-col>
-            <v-form
-            ref="form"
-            v-model="valid"
-            lazy-validation
-            >
-            <v-text-field
-            v-model="formData.first_name"
-            :rules="nameRules"
-            label="First Name"
-            required
-            ></v-text-field>
-            <v-text-field
-            v-model="formData.last_name"
-            :rules="nameRules"
-            label="Last Name"
-            required
-            ></v-text-field>
-            <v-text-field
-            v-model="formData.email"
-            :rules="emailRules"
-            label="E-mail"
-            required
-            ></v-text-field>
-            <v-text-field
-            v-model="formData.password"
-            :rules="passwordRules"
-            label="Password"
-            type="password"
-            required
-            ></v-text-field>
-            <v-radio-group v-model="formData.role" row>
-            <v-radio
-                v-for="role in roles"
-                :key="role"
-                :label="role"
-                :value="role"
-            ></v-radio>
-            </v-radio-group>
+                <v-form
+                    ref="form"
+                    v-model="valid"
+                    lazy-validation
+                >
+                <v-text-field
+                    v-model="formData.first_name"
+                    :rules="nameRules"
+                    label="First Name"
+                    required
+                ></v-text-field>
+                <v-text-field
+                    v-model="formData.last_name"
+                    :rules="nameRules"
+                    label="Last Name"
+                    required
+                ></v-text-field>
+                <v-text-field
+                    v-model="formData.email"
+                    :rules="emailRules"
+                    label="E-mail"
+                    required
+                ></v-text-field>
+                <v-text-field
+                    v-model="formData.password"
+                    :rules="passwordRules"
+                    label="Password"
+                    type="password"
+                    required
+                ></v-text-field>
+                <v-text-field
+                    v-model="formData.confirm_password"
+                    :rules="confirmPasswordRules"
+                    label="Confirm password"
+                    type="password"
+                ></v-text-field>
+                <v-radio-group v-model="formData.role" row>
+                <v-radio
+                    v-for="role in roles"
+                    :key="role"
+                    :label="role"
+                    :value="role"
+                ></v-radio>
+                </v-radio-group>
 
-            <v-btn
-            color="success"
-            class="mr-4"
-            @click="submit"
-            >
-            Submit
-            </v-btn>
-            </v-form>
+                <v-btn
+                    color="success"
+                    class="mr-4"
+                    @click="submit"
+                >
+                    Submit
+                </v-btn>
+                </v-form>
             </v-col>
         </v-row>
     </div>
@@ -65,7 +71,7 @@
     import { Link } from '@inertiajs/inertia-vue';
 
   export default {
-    name: 'Dash',
+    name: 'UserCreate',
     layout: Layout,
     components: {
         Link,
@@ -80,6 +86,8 @@
                 last_name: null,
                 first_name: null,
                 role: null,
+                password: null,
+                confirm_password: null,
             },
             valid: false,
             emailRules: [
@@ -93,6 +101,10 @@
             passwordRules: [
                 v => !!v || 'Password is required',
                 v => (v && v.length > 5) || 'Password is too short',
+            ],
+            confirmPasswordRules: [
+                v => !!v || 'Password is required',
+                v => (v && v == this.formData.password) || 'Password mismatch',
             ],
         };
     },

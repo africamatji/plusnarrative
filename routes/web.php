@@ -39,6 +39,14 @@ Route::group(['middleware' => ['permission:view-admin-dashboard']], function () 
         UserController::class, 'create' 
     ])->middleware(['auth'])->name('usercreate');  
 
+    Route::get('/user/update/{id}', [ 
+        UserController::class, 'viewUpdate' 
+    ])->middleware(['auth'])->name('userupdateview'); 
+
+    Route::post('/user/update', [ 
+        UserController::class, 'update' 
+    ])->middleware(['auth'])->name('userupdate'); 
+
     Route::get('/pages', [ 
         PageController::class, 'view' 
     ])->middleware(['auth'])->name('pageview');      
