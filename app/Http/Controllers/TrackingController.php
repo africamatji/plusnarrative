@@ -15,25 +15,37 @@ class TrackingController extends Controller
         $response = $client->request('GET', env('IP_API_URL'));
         if ($response->getBody()) {
             $array = json_decode($response->getBody()->getContents(), true);
-            $input = [
+            $data = [
                 'user_id' => $user_id,
                 'ip_location' => $array['dns']['geo'],
                 'ip' => $array['dns']['ip'],
                 'browser' => $request->server('HTTP_USER_AGENT')
             ];
 
-            $tracking = Tracking::create($input);
-            $this->emailNotification();
+            if (!$this->userExists($data)) {
+                $this->emailNotification();
+            }
+
+            $tracking = Tracking::create($data);
         }
     }
 
     public function emailNotification () {
         $user = Auth::user();
         $emailData = [
-            'body' => 'A new User has loged in to your application',
+            'body' => 'There is a login from a new device/browser',
         ];
 
         Notification::send($user, new NewUser($emailData));
+    }
+
+    public function userExists ($data) {
+        $tracking = Tracking::where('ip', '=', $data['ip'])
+            ->where('browser', '=', $data['browser'])
+            ->where('user_id', '=', $data['user_id'])
+            ->first();
+            
+        return isset($tracking);
     }
 
 }
