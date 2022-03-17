@@ -26,6 +26,11 @@
                       class="mx-4"
                     ></v-text-field>
                   </template>
+                  <template v-slot:[`item.first_name`]="{ item }">
+                    <Link :href="'/user/update/'+item.id">
+                        {{ item.first_name }}
+                    </Link>
+                  </template>         
                 </v-data-table>
               </div>
           </v-col>
@@ -35,10 +40,14 @@
 
 <script>
   import Layout from './../Layout';
+  import { Link } from "@inertiajs/inertia-vue";
 
   export default {
     name: 'Dashboard',
     layout: Layout,
+    components: {
+        Link,
+    },
     props: {
       users: Array,
     },
