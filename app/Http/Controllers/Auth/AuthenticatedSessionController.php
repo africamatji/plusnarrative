@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         $tracking = new TrackingController();
-        $tracking->create();
+        $tracking->create($request);
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
