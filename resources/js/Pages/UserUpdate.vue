@@ -1,12 +1,12 @@
 <template>
     <div>
         <v-row>
-            <v-col>
+            <v-col class="pa-4">
                 <Link href="/dashboard" class="white--text">Back to users</Link>
                 <h1 class="white--text">{{ formData.first_name }}</h1>
             </v-col>
         </v-row>
-        <v-row class="mt-10">
+        <v-row>
             <v-col cols="8">
                 <v-card
                     color="#333"
