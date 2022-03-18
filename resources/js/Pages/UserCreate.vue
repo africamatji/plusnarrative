@@ -41,11 +41,13 @@
                         label="E-mail"
                         required
                     ></v-text-field>
-                    <v-select
-                        v-model="formData.role"
-                        :items="roles_arr"
-                        :label="roles_arr[0]"
-                    ></v-select>
+                    <v-checkbox
+                        v-model="formData.roles"
+                        v-for="role in roles_arr"
+                        :key="role"
+                        :value="role"
+                        :label="role"
+                    ></v-checkbox>
                     <v-row>
                         <v-col>
                             <v-text-field
@@ -100,7 +102,7 @@
                 email: null,
                 last_name: null,
                 first_name: null,
-                role: null,
+                roles: [],
                 password: null,
                 confirm_password: null,
             },

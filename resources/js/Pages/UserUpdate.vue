@@ -41,11 +41,13 @@
                         label="E-mail"
                         required
                     ></v-text-field>
-                    <v-select
-                        v-model="formData.role"
-                        :items="roles_arr"
-                        :label="roles_arr[0]"
-                    ></v-select>
+                    <v-checkbox
+                        v-model="formData.roles"
+                        v-for="role in roles_arr"
+                        :key="role"
+                        :value="role"
+                        :label="role"
+                    ></v-checkbox>
                     <v-row>
                         <v-col>
                             <v-text-field
@@ -102,7 +104,7 @@
                     email: null,
                     last_name: null,
                     first_name: null,
-                    role: null,
+                    roles: null,
                     password: null,
                     confirm_password: null,
                     id: null,
@@ -128,7 +130,7 @@
             };
         },
         created () {
-            this.formData.role = this.user_roles[0];
+            this.formData.roles = this.user_roles;
             this.formData.last_name = this.user.last_name;
             this.formData.first_name = this.user.first_name;
             this.formData.email = this.user.email;

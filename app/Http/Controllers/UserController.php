@@ -14,6 +14,7 @@ class UserController extends Controller
 {
     function __construct () {
         $this->middleware('permission:', ['only' => ['destroy']]);
+        //$this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
     }
 
     public function list () {
@@ -37,14 +38,16 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm_password',
-            'role' => 'required'
+            'roles' => 'required|array'
         ]);
-
         $input = $request->all();
         $input['name'] = $request->input('first_name');
         $input = Arr::except($input,array('confirm_password'));
         $user = User::create($input);
-        $user->assignRole($request->input('role'));
+
+        forEach($request->input('roles') as $role){
+            $user->assignRole($role);
+        }
 
         return redirect()->route('dashboard');
     }
@@ -69,7 +72,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm_password',
-            'role' => 'required'
+            'roles' => 'required|array'
         ]);
 
         $input = $request->all();
@@ -83,6 +86,8 @@ class UserController extends Controller
 
         $user = User::find($id);
         $user->update($input);
+        
+        $user->syncRoles($request->input('roles'));
 
         return redirect()->route('dashboard');
     }
