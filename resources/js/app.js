@@ -16,10 +16,11 @@ Vue.component("inertia-link", Link);
 createInertiaApp({
     resolve: name => {
         const page = require(`./Pages/${name}`).default
-        if (page.layout === undefined) {
-            page.layout = PublicLayout;
+        if (page.layout !== undefined) {
+            //page.layout = PublicLayout;
+            page.layout = page.layout || Layout
         }
-        page.layout = page.layout || Layout
+        
         return page
     },
     setup({ el, App, props, plugin }) {

@@ -8,7 +8,7 @@ use Inertia\Inertia;
 class HomeController extends Controller
 {
     public function welcome () {
-        return Inertia::render('Home', ['test' => 'Its works']);
+        return view('welcome');
     }
 
     public function pages () {

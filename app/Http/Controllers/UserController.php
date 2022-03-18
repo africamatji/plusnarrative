@@ -18,7 +18,6 @@ class UserController extends Controller
 
     public function list () {
         $users = User::get();
-
         return Inertia::render('Dashboard',[
             'users' => $users,
         ]);

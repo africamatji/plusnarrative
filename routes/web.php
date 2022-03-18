@@ -25,7 +25,9 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('/payment/signature', [BookingsController::class, 'generateSignature']);
 });
 */
-Route::get('/', [HomeController::class, 'welcome']);
+Route::get('/', function () {
+    return view('auth.login');
+});
 Route::group(['middleware' => ['permission:view-admin-dashboard']], function () {
     Route::get('/dashboard', [ 
         UserController::class, 'list' 
