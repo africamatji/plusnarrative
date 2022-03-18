@@ -2,65 +2,80 @@
     <div>
         <v-row>
             <v-col>
-                <Link href="/dashboard">Back to users</Link>
-                <h1>{{ formData.first_name }}</h1>
+                <Link href="/dashboard" class="white--text">Back to users</Link>
+                <h1 class="white--text">{{ formData.first_name }}</h1>
             </v-col>
         </v-row>
         <v-row>
-            <v-col>
-                <v-form
-                    ref="form"
-                    v-model="valid"
-                    lazy-validation
+            <v-col cols="8">
+                <v-card
+                    color="#333"
+                    class="pa-8 pr-10"
                 >
-                <v-text-field
-                    v-model="formData.first_name"
-                    :rules="nameRules"
-                    label="First Name"
-                    required
-                ></v-text-field>
-                <v-text-field
-                    v-model="formData.last_name"
-                    :rules="nameRules"
-                    label="Last Name"
-                    required
-                ></v-text-field>
-                <v-text-field
-                    v-model="formData.email"
-                    :rules="emailRules"
-                    label="E-mail"
-                    required
-                ></v-text-field>
-                <v-text-field
-                    v-model="formData.password"
-                    :rules="passwordRules"
-                    label="Password"
-                    type="password"
-                    required
-                ></v-text-field>
-                <v-text-field
-                    v-model="formData.confirm_password"
-                    :rules="confirmPasswordRules"
-                    label="Confirm password"
-                    type="password"
-                ></v-text-field>
-                <v-radio-group v-model="formData.role" row>
-                <v-radio
-                    v-for="role in roles"
-                    :key="role"
-                    :label="role"
-                    :value="role"
-                ></v-radio>
-                </v-radio-group>
-
-                <v-btn
-                    color="success"
-                    class="mr-4"
-                    @click="submit"
-                >
-                    Submit
-                </v-btn>
-                </v-form>
+                    <v-form
+                        ref="form"
+                        v-model="valid"
+                        lazy-validation
+                    >
+                        <v-row>
+                            <v-col>
+                                <v-text-field
+                                    v-model="formData.first_name"
+                                    :rules="nameRules"
+                                    label="First Name"
+                                    required
+                                ></v-text-field>
+                            </v-col>
+                            <v-col>
+                                <v-text-field
+                                    v-model="formData.last_name"
+                                    :rules="nameRules"
+                                    label="Last Name"
+                                    required
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                    <v-text-field
+                        v-model="formData.email"
+                        :rules="emailRules"
+                        label="E-mail"
+                        required
+                    ></v-text-field>
+                    <v-select
+                        v-model="formData.role"
+                        :items="roles_arr"
+                        :label="roles_arr[0]"
+                    ></v-select>
+                    <v-row>
+                        <v-col>
+                            <v-text-field
+                                v-model="formData.password"
+                                :rules="passwordRules"
+                                label="Password"
+                                type="password"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
+                                v-model="formData.confirm_password"
+                                :rules="confirmPasswordRules"
+                                label="Confirm password"
+                                type="password"
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-btn
+                        color="orange"
+                        class="mr-4"
+                        @click="submit"
+                        rounded
+                        outlined
+                    >
+                        Submit
+                    </v-btn>
+                    </v-form>
+                </v-card>
             </v-col>
         </v-row>
     </div>
@@ -90,6 +105,7 @@
                 confirm_password: null,
             },
             valid: false,
+            roles_arr: [],
             emailRules: [
                 v => !!v || 'E-mail is required',
                 v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -107,6 +123,12 @@
                 v => (v && v == this.formData.password) || 'Password mismatch',
             ],
         };
+    },
+    created () {
+        Object.keys(this.roles).forEach((item)=>{
+            console.log('item : ', item);
+            this.roles_arr.push(item);
+        });
     },
     methods: {
         submit () {
