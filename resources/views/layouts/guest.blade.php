@@ -19,7 +19,11 @@
     <body>
         <div class="container mt-4">
         <div class="row">
-            <div class="span4"><img src="{{ asset('img/logo-plusnarrative.svg') }}" /></div>
+            <div class="span4">
+                <a href="{{ url('/') }}">
+                    <img src="{{ asset('img/logo-plusnarrative.svg') }}" />
+                </a>
+            </div>
         </div>
         </div>
         <div class="font-sans text-gray-900 antialiased">

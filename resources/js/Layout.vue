@@ -17,7 +17,6 @@
                                         src="./img/logo-plusnarrative.svg"
                                         width="170"
                                     >
-
                                     </v-img>
                                 </v-list-item-title>
                             </v-list-item-content>
@@ -85,7 +84,7 @@
         },
         methods: {
             logout () {
-                this.$inertia.post('/logout');
+                this.$inertia.get('/logout');
             },
         },
     };

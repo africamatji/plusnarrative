@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
         $tracking = new TrackingController();
         $tracking->create($request);
         return Auth::user()->hasAnyRole(['admin', 'content_manager']) ? 
-            redirect()->intended(RouteServiceProvider::HOME) : redirect()->intended('/public');
+            redirect()->intended(RouteServiceProvider::HOME) : redirect()->intended('/');
 
         //var_dump($user);
 
