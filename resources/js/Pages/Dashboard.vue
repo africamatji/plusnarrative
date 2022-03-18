@@ -1,10 +1,10 @@
 <template>
   <div>
-      <v-row>
+      <v-row class="pa-4">
             <v-col>
                 <h1 class="white--text">Users</h1>
             </v-col>
-            <v-col>
+            <v-col align="right">
                 <inertia-link as="v-btn" href="/user" color="#ff0043"> Create new user </inertia-link>
             </v-col>
         </v-row>

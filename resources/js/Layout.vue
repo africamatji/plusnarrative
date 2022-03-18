@@ -12,7 +12,7 @@
                     <template v-slot:prepend>
                         <v-list-item two-line>
                             <v-list-item-content>
-                                <v-list-item-title>
+                                <v-list-item-title class="pa-4">
                                     <v-img
                                         src="./img/logo-plusnarrative.svg"
                                         width="170"

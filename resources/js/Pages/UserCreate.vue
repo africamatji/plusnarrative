@@ -47,6 +47,8 @@
                         :key="role"
                         :value="role"
                         :label="role"
+                        :rules="rolesRules"
+                        required
                     ></v-checkbox>
                     <v-row>
                         <v-col>
@@ -124,6 +126,9 @@
                 v => !!v || 'Password is required',
                 v => (v && v == this.formData.password) || 'Password mismatch',
             ],
+            rolesRules: [
+                v => (v && v.length > 0) || 'Roles is required',
+            ],
         };
     },
     created () {
@@ -136,7 +141,7 @@
         submit () {
             if (this.$refs.form.validate()) {
                 this.$inertia.post('/user/create', this.formData)
-            } 
+            }
         },
     }, 
   }
