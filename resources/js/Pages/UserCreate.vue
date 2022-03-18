@@ -41,15 +41,18 @@
                         label="E-mail"
                         required
                     ></v-text-field>
-                    <v-checkbox
-                        v-model="formData.roles"
-                        v-for="role in roles_arr"
-                        :key="role"
-                        :value="role"
-                        :label="role"
-                        :rules="rolesRules"
-                        required
-                    ></v-checkbox>
+                    <v-row justify="center">
+                        <v-col v-for="role in roles_arr" :key="role">
+                            <v-checkbox
+                                v-model="formData.roles"
+                                :value="role"
+                                :label="role"
+                                :rules="rolesRules"
+                                required
+                            ></v-checkbox>
+                        </v-col>
+                    </v-row>
+
                     <v-row>
                         <v-col>
                             <v-text-field

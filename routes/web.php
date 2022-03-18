@@ -28,6 +28,11 @@ Route::group(['middleware' => ['api']], function () {
 Route::get('/', function () {
     return view('auth.login');
 });
+
+Route::get('/public', function () {
+    return view('welcome');
+});
+
 Route::group(['middleware' => ['permission:view-admin-dashboard']], function () {
     Route::get('/dashboard', [ 
         UserController::class, 'list' 
