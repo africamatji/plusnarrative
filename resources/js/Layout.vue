@@ -14,7 +14,7 @@
                             <v-list-item-content>
                                 <v-list-item-title class="pa-4">
                                     <v-img
-                                        src="./img/logo-plusnarrative.svg"
+                                        src="/img/logo-plusnarrative.svg"
                                         width="170"
                                     >
                                     </v-img>

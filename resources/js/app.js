@@ -13,6 +13,8 @@ InertiaProgress.init();
 Vue.use(Vuetify);
 Vue.component("inertia-link", Link);
 
+import '../css/main.css';
+
 createInertiaApp({
     resolve: name => {
         const page = require(`./Pages/${name}`).default

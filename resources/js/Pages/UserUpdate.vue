@@ -24,6 +24,7 @@
                                     :rules="nameRules"
                                     label="First Name"
                                     required
+                                    outlined
                                 ></v-text-field>
                             </v-col>
                             <v-col>
@@ -32,6 +33,7 @@
                                     :rules="nameRules"
                                     label="Last Name"
                                     required
+                                    outlined
                                 ></v-text-field>
                             </v-col>
                         </v-row>
@@ -40,6 +42,7 @@
                             :rules="emailRules"
                             label="E-mail"
                             required
+                            outlined
                         ></v-text-field>
                         <v-row justify="center">
                             <v-col v-for="role in roles_arr" :key="role">
@@ -59,6 +62,7 @@
                                 :rules="(formData.password) ? passwordRules : []"
                                 label="Password"
                                 type="password"
+                                outlined
                             ></v-text-field>
                         </v-col>
                         <v-col>
@@ -67,6 +71,7 @@
                                 :rules="(formData.confirm_password) ? confirmPasswordRules : []"
                                 label="Confirm password"
                                 type="password"
+                                outlined
                             ></v-text-field>
                         </v-col>
                     </v-row>
@@ -158,7 +163,21 @@
 </script>
 
 <style scoped>
-.white-border input{
-    border-color: #fff !important;
-}
+    .v-text-field--outlined >>> fieldset {
+        border-color: #999;
+        border-left: #ccc;
+        border-right: #ccc;
+        border-top: #ccc;
+        border-radius: 0;
+        color:#999 !important;
+    } 
+    .v-text-field--outlined >>> label {
+        color: #fff !important;
+    }
+    .v-input--checkbox >>> label {
+        color: #fff !important;
+    }
+    .v-text-field--outlined >>> input {
+        color: #fff !important;
+    }
 </style>
