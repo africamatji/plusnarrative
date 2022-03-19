@@ -42,6 +42,7 @@ class UserController extends Controller
         ]);
         $input = $request->all();
         $input['name'] = $request->input('first_name');
+        $input['password'] = Hash::make($request->input('password'));
         $input = Arr::except($input,array('confirm_password'));
         $user = User::create($input);
 
